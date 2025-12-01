@@ -37,3 +37,8 @@ build/
 
 ### Mac OS ###
 .DS_Store
+
+# In your .gitignore
+database.properties  # Exclude properties file with passwords
+config/              # Exclude config directories
+*.env               # Exclude environment files
