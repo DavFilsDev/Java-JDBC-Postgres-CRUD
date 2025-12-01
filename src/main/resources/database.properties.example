@@ -1,0 +1,5 @@
+# database.properties.example
+# Copy this file to database.properties and fill in your credentials
+db.url=jdbc:postgresql://localhost:5432/database_name
+db.user=user
+db.password=password
