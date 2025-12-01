@@ -1,91 +1,54 @@
 package com.example.main;
 
-import com.example.config.DatabaseConfig;
 import com.example.dao.UserDAO;
 import com.example.model.User;
-import com.example.util.DatabaseConnection;
-
 import java.util.List;
 
 public class Main {
     public static void main(String[] args) {
-        System.out.println("🚀 Starting Java JDBC PostgreSQL CRUD Application\n");
-
-        // Show configuration
-        System.out.println(DatabaseConfig.getConfigSummary() + "\n");
-
-        // Test connection first
-        System.out.println("🔧 Testing database connection...");
-        if (!DatabaseConnection.testConnection()) {
-            System.err.println("❌ Cannot proceed without database connection!");
-            return;
-        }
-
-        DatabaseConnection.printConnectionInfo();
+        System.out.println("🚀 Démarrage application JDBC\n");
 
         UserDAO userDAO = new UserDAO();
 
-        try {
-            // 1. CREATE - Add new users
-            System.out.println("\n--- CREATE Users ---");
-            User newUser1 = new User("Alice Johnson", "alice@example.com", 28);
-            int id1 = userDAO.createUser(newUser1);
+        // 1. CREATE
+        System.out.println("--- CREATE ---");
+        User user1 = new User("Alice", "alice@email.com", 25);
+        userDAO.createUser(user1);
 
-            User newUser2 = new User("Bob Williams", "bob@example.com", 35);
-            int id2 = userDAO.createUser(newUser2);
+        User user2 = new User("Bob", "bob@email.com", 30);
+        userDAO.createUser(user2);
 
-            // 2. READ - Get user by ID
-            System.out.println("\n--- READ User by ID ---");
-            User user = userDAO.getUserById(id1);
-            if (user != null) {
-                System.out.println("Retrieved: " + user);
-            }
+        // 2. READ ALL
+        System.out.println("\n--- READ ALL ---");
+        List<User> users = userDAO.getAllUsers();
+        users.forEach(System.out::println);
 
-            // 3. READ ALL - Get all users
-            System.out.println("\n--- READ All Users ---");
-            List<User> allUsers = userDAO.getAllUsers();
-            System.out.println("Total users in database: " + allUsers.size());
-            allUsers.forEach(System.out::println);
-
-            // 4. UPDATE - Update a user
-            System.out.println("\n--- UPDATE User ---");
-            if (user != null) {
-                user.setName("Alice Brown");
-                user.setAge(29);
-                boolean updated = userDAO.updateUser(user);
-
-                if (updated) {
-                    // Verify update
-                    User updatedUser = userDAO.getUserById(user.getId());
-                    System.out.println("After update: " + updatedUser);
-                }
-            }
-
-            // 5. DELETE - Delete a user
-            System.out.println("\n--- DELETE User ---");
-            boolean deleted = userDAO.deleteUser(id2);
-            if (deleted) {
-                System.out.println("User with ID " + id2 + " was deleted.");
-            }
-
-            // Show final list
-            System.out.println("\n--- Final Users List ---");
-            List<User> finalUsers = userDAO.getAllUsers();
-            if (finalUsers.isEmpty()) {
-                System.out.println("No users found in database.");
-            } else {
-                System.out.println("Remaining users: " + finalUsers.size());
-                finalUsers.forEach(System.out::println);
-            }
-
-        } catch (Exception e) {
-            System.err.println("❌ Unexpected error: " + e.getMessage());
-            e.printStackTrace();
-        } finally {
-            // Close connection
-            DatabaseConnection.closeConnection();
+        // 3. READ BY ID
+        System.out.println("\n--- READ BY ID ---");
+        if (!users.isEmpty()) {
+            User foundUser = userDAO.getUserById(users.get(0).getId());
+            System.out.println("Trouvé: " + foundUser);
         }
 
-        System.out.println("\n✅ Application completed successfully!");
+        // 4. UPDATE
+        System.out.println("\n--- UPDATE ---");
+        if (!users.isEmpty()) {
+            User toUpdate = users.get(0);
+            toUpdate.setName("Alice Modifiée");
+            toUpdate.setAge(26);
+            userDAO.updateUser(toUpdate);
+        }
+
+        // 5. DELETE
+        System.out.println("\n--- DELETE ---");
+        if (!users.isEmpty() && users.size() > 1) {
+            userDAO.deleteUser(users.get(1).getId());
+        }
+
+        // 6. FINAL RESULT
+        System.out.println("\n--- RESULTAT FINAL ---");
+        userDAO.getAllUsers().forEach(System.out::println);
+
+        System.out.println("\n✅ Application terminée!");
     }
 }

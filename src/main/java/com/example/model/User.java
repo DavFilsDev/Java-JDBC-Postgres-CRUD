@@ -6,7 +6,7 @@ public class User {
     private String email;
     private int age;
 
-    // Constructors
+    // Constructeurs
     public User() {}
 
     public User(String name, String email, int age) {
@@ -15,14 +15,7 @@ public class User {
         this.age = age;
     }
 
-    public User(int id, String name, String email, int age) {
-        this.id = id;
-        this.name = name;
-        this.email = email;
-        this.age = age;
-    }
-
-    // Getters and Setters (generate them: Alt+Insert → Getter and Setter)
+    // Getters et Setters
     public int getId() { return id; }
     public void setId(int id) { this.id = id; }
 
@@ -37,11 +30,7 @@ public class User {
 
     @Override
     public String toString() {
-        return "User{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                ", email='" + email + '\'' +
-                ", age=" + age +
-                '}';
+        return String.format("User[id=%d, name='%s', email='%s', age=%d]",
+                id, name, email, age);
     }
 }
