@@ -20,10 +20,10 @@ public class UserDAO {
             stmt.setInt(3, user.getAge());
             stmt.executeUpdate();
 
-            System.out.println("✅ User créé: " + user.getName());
+            System.out.println("✅ User created: " + user.getName());
 
         } catch (SQLException e) {
-            System.err.println("❌ Erreur création: " + e.getMessage());
+            System.err.println("❌ error to create: " + e.getMessage());
         }
     }
 
@@ -46,7 +46,7 @@ public class UserDAO {
             }
 
         } catch (SQLException e) {
-            System.err.println("❌ Erreur lecture: " + e.getMessage());
+            System.err.println("❌ error to read: " + e.getMessage());
         }
         return users;
     }
@@ -72,7 +72,7 @@ public class UserDAO {
             rs.close();
 
         } catch (SQLException e) {
-            System.err.println("❌ Erreur recherche: " + e.getMessage());
+            System.err.println("❌ error to search: " + e.getMessage());
         }
         return user;
     }
@@ -90,10 +90,10 @@ public class UserDAO {
             stmt.setInt(4, user.getId());
             stmt.executeUpdate();
 
-            System.out.println("✅ User mis à jour: " + user.getId());
+            System.out.println("✅ User updated: " + user.getId());
 
         } catch (SQLException e) {
-            System.err.println("❌ Erreur mise à jour: " + e.getMessage());
+            System.err.println("❌ error to update: " + e.getMessage());
         }
     }
 
@@ -107,10 +107,10 @@ public class UserDAO {
             stmt.setInt(1, id);
             stmt.executeUpdate();
 
-            System.out.println("✅ User supprimé: " + id);
+            System.out.println("✅ User deleted: " + id);
 
         } catch (SQLException e) {
-            System.err.println("❌ Erreur suppression: " + e.getMessage());
+            System.err.println("❌ error to delete: " + e.getMessage());
         }
     }
 }

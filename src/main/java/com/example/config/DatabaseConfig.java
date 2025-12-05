@@ -13,8 +13,7 @@ public class DatabaseConfig {
     }
 
     private static void loadConfig() {
-        try (InputStream input = DatabaseConfig.class.getClassLoader()
-                .getResourceAsStream("database.properties")) {
+        try (InputStream input = DatabaseConfig.class.getClassLoader().getResourceAsStream("database.properties")) {
 
             Properties props = new Properties();
             props.load(input);
@@ -24,7 +23,7 @@ public class DatabaseConfig {
             PASSWORD = props.getProperty("db.password");
 
         } catch (Exception e) {
-            System.err.println("Erreur chargement config: " + e.getMessage());
+            System.err.println("error loading config: " + e.getMessage());
         }
     }
 }

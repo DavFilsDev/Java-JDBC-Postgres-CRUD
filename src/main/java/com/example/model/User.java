@@ -6,7 +6,7 @@ public class User {
     private String email;
     private int age;
 
-    // Constructeurs
+    // Constructors
     public User() {}
 
     public User(String name, String email, int age) {

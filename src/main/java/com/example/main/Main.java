@@ -6,7 +6,7 @@ import java.util.List;
 
 public class Main {
     public static void main(String[] args) {
-        System.out.println("🚀 Démarrage application JDBC\n");
+        System.out.println("🚀 Marriage application JDBC\n");
 
         UserDAO userDAO = new UserDAO();
 
@@ -26,15 +26,15 @@ public class Main {
         // 3. READ BY ID
         System.out.println("\n--- READ BY ID ---");
         if (!users.isEmpty()) {
-            User foundUser = userDAO.getUserById(users.get(0).getId());
-            System.out.println("Trouvé: " + foundUser);
+            User foundUser = userDAO.getUserById(users.getFirst().getId());
+            System.out.println("found: " + foundUser);
         }
 
         // 4. UPDATE
         System.out.println("\n--- UPDATE ---");
         if (!users.isEmpty()) {
-            User toUpdate = users.get(0);
-            toUpdate.setName("Alice Modifiée");
+            User toUpdate = users.getFirst();
+            toUpdate.setName("Alice Modified");
             toUpdate.setAge(26);
             userDAO.updateUser(toUpdate);
         }
@@ -46,9 +46,9 @@ public class Main {
         }
 
         // 6. FINAL RESULT
-        System.out.println("\n--- RESULTAT FINAL ---");
+        System.out.println("\n--- RESULT FINAL ---");
         userDAO.getAllUsers().forEach(System.out::println);
 
-        System.out.println("\n✅ Application terminée!");
+        System.out.println("\n✅ Application terminate!");
     }
 }

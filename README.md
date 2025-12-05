@@ -55,7 +55,7 @@ GRANT ALL PRIVILEGES ON TABLES TO java_app_user;
 ### 3. Configure Application:
 1. Copy `database.properties.example` to `database.properties`:
 ```bash
-cp src/main/resources/database.properties.example src/main/resources/database.properties
+cp src/main/resources/example.database.properties src/main/resources/database.properties
 ```
 
 2. Edit `database.properties` with your credentials:
